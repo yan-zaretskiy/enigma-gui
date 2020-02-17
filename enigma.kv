@@ -1,0 +1,70 @@
+<EnigmaWindow>:
+    # background
+    canvas.before:
+        Color:
+            rgba: (66/255, 66/255, 79/255, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    orientation: 'vertical'
+    spacing: 50
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        size_hint_y: .34
+        BoxLayout:
+            size_hint: (None, None)
+            size: (680, 200)
+            orientation: 'horizontal'
+            spacing: 40
+            Knob:
+                id: knob1
+            Knob:
+                id: knob2
+            Knob:
+                id: knob3
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
+        size_hint_y: .58
+        GridLayout:
+            size_hint: (None, None)
+            size: (900 + 20 * 8, 300 + 20 * 2)
+            id: lamps
+            cols: 9
+            spacing: 20
+
+<ColoredLabel>:
+    color: (64/255, 64/255, 64/255, 1.0)
+    font_size: 40
+    size_hint: (None, None)
+    size: (100, 100)
+    canvas.before:
+        Color:
+            rgba: (0.6, 0.6, 0.6, 1)
+        Ellipse:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: self.bgcolor
+        Ellipse:
+            pos: (self.pos[0] + self.thickness / 2, self.pos[1] + self.thickness / 2)
+            size: (self.size[0] - self.thickness, self.size[1] - self.thickness)
+
+<Knob>:
+    size_hint: (None, None)
+    size: 200, 200
+    value: 0
+    min: 0
+    max: 26
+    step: 1
+    knobimg_source: "img/knob_black.png"
+    markeroff_color: 0.0, 0.0, 0.0, 1
+    knobimg_size: 0.9
+    marker_img: "img/bline3.png"
+    show_marker: False
+    Label:
+        text: list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")[(int(self.parent.value))]
+        center: self.parent.center
+        font_size: 40
+        color: 1, 150/255, 0.0, 1
